@@ -22,19 +22,13 @@ namespace OefeningPF
             Bedrag = BerekenTotaalBedrag();
         }
         public decimal BerekenBedrag() => Bedrag;
-        public int AantalExtras() => Extra != null ? Extra.Count() : 0;
+        public int AantalExtras=> Extra != null ? Extra.Count() : 0;
         public decimal BerekenTotaalBedrag()
         {
             totaalBedrag += Gerecht.BerekenBedrag();
             if (Grootte == Grootte.Groot)
                 totaalBedrag += 3m;
-            if (Extra != null)
-            {
-                foreach (var extras in Extra)
-                {
-                    totaalBedrag += 1m;
-                }
-            }
+            totaalBedrag += AantalExtras;
             return totaalBedrag;
         }
         public string ExtraString(string teken)

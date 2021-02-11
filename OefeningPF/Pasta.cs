@@ -22,9 +22,7 @@ namespace OefeningPF
         public override string ToonGerecht()
         {
             onderdeldString = "";
-            onderdeldString += "pasta#";
-            onderdeldString += $"{Naam}#";
-            onderdeldString += $"{Prijs}#";
+            onderdeldString += "pasta#" + $"{Naam}#" + $"{Prijs}#";
             onderdeldString += Omschrijving != "" ? string.Join("#", $"met {Omschrijving}"): "";
             return onderdeldString;
 

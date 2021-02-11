@@ -35,9 +35,7 @@ namespace OefeningPF
         public override string ToonGerecht()
         {
             onderdeldString = "";
-            onderdeldString += "pizza#";
-            onderdeldString += $"{Naam}#";
-            onderdeldString += $"{Prijs}#";
+            onderdeldString += "pizza#" + $"{Naam}#" + $"{Prijs}#";
             foreach (var onderdeel in Onderdelen)
             {
                 onderdeldString += onderdeel + "#";

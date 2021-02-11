@@ -23,16 +23,16 @@ namespace OefeningPF
             Pasta Arrabbiata = new Pasta("Penne Arrabbiata", 14m, "pittige romatensaus");
             Pasta Lasagne = new Pasta("Lasagne", 15m);
 
-            Warmedrank Thee = new Warmedrank(Drank.DrankNaam.Thee);
-            Warmedrank Koffie = new Warmedrank(Drank.DrankNaam.Koffie);
+            Warmedrank Thee = new Warmedrank("Thee");
+            Warmedrank Koffie = new Warmedrank("Koffie");
 
-            Frisdrank Water = new Frisdrank(Drank.DrankNaam.Water);
-            Frisdrank Limonade = new Frisdrank(Drank.DrankNaam.Limonade);
-            Frisdrank Cocacola = new Frisdrank(Drank.DrankNaam.Cocacola);
+            Frisdrank Water = new Frisdrank("Water");
+            Frisdrank Limonade = new Frisdrank("Limonade");
+            Frisdrank Cocacola = new Frisdrank("Cocacola");
 
-            Dessert Tiramisu = new Dessert(Dessert.NaamDesseert.Tiramisu);
-            Dessert Ijs = new Dessert(Dessert.NaamDesseert.Ijs);
-            Dessert Cake = new Dessert(Dessert.NaamDesseert.Cake);
+            Dessert Tiramisu = new Dessert(Dessert.NaamDesseert.Tiramisu, 3m);
+            Dessert Ijs = new Dessert(Dessert.NaamDesseert.Ijs, 3m);
+            Dessert Cake = new Dessert(Dessert.NaamDesseert.Cake, 2m);
 
             Klant Jan = new Klant(1, "Jan Janssen");
             Klant Piet = new Klant(2, "Piet Peeters");
@@ -62,6 +62,7 @@ namespace OefeningPF
             };
 
             Console.WriteLine("Toon eerste lijst van bestellingen: \n");
+
             foreach (var bestelling in bestellingen)
             {
                 Console.WriteLine(bestelling);
@@ -124,8 +125,6 @@ namespace OefeningPF
             try
             {
                 using var schrijver = new StreamWriter(locatieVanKlant + "klanten.txt");
-                string titel = "KlantGegevens:";
-                schrijver.WriteLine(titel);
                 foreach (var klant in klanten)
                 {
                     klantgegevens = new StringBuilder();
@@ -149,12 +148,10 @@ namespace OefeningPF
             try
             {
                 using var schrijver = new StreamWriter(locatieVanGerechten + "gerechten.txt");
-                string titel = "Gerechten:";
-                schrijver.WriteLine(titel);
                 foreach (var gerecht in Gerechten)
                 {
                     gerechten = new StringBuilder();
-                    gerechten.Append($"{gerecht.ToonGerecht()}");
+                    gerechten.Append(gerecht.ToonGerecht());
                     schrijver.WriteLine(gerechten);
                 }
             }
@@ -168,15 +165,13 @@ namespace OefeningPF
             }
 
 
-            //Console.WriteLine("bestellingen: bestellingen.txt");
+            Console.WriteLine("bestellingen: bestellingen.txt");
             string locatieVanBestelling = @"C:\Data\";
             StringBuilder bestellingData;
-            String bestellingLezen;
+            string bestellingLezen;
             try
             {
                 using var schrijver = new StreamWriter(locatieVanBestelling + "bestellingen.txt");
-                string titel = "Bestellingen:";
-                schrijver.WriteLine(titel);
                 foreach (var bestelling in bestellingen)
                 {
                     bestellingData = new StringBuilder();

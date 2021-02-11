@@ -31,21 +31,14 @@ namespace OefeningPF
         public decimal BerekenBedrag()
         {
             totaalBedrag = 0m;
-
+            decimal gerechtenPrijs = BesteldGerechten != null ? BesteldGerechten.BerekenBedrag() : 0m;
+            decimal drankPrijs = Dranken != null ? Dranken.BerekenBedrag() : 0m;
+            decimal dessertsPrijs = Desserts != null ? Desserts.BerekenBedrag() : 0m;
+            totaalBedrag = Aantal * (drankPrijs + gerechtenPrijs + dessertsPrijs);
             if (BesteldGerechten != null && Dranken != null && Desserts != null)
-            {
-                totaalBedrag = Aantal * (BesteldGerechten.BerekenBedrag() + Dranken.BerekenBedrag() + Desserts.BerekenBedrag());
-                totaalBedrag = totaalBedrag * 90/100;
-            }
-            else
-            {
-                decimal gerechtenPrijs = BesteldGerechten != null ? BesteldGerechten.BerekenBedrag() : 0m;
-                decimal drankPrijs = Dranken != null ? Dranken.BerekenBedrag() : 0m;
-                decimal dessertsPrijs = Desserts != null ? Desserts.BerekenBedrag() : 0m;
-                totaalBedrag = Aantal * (drankPrijs + gerechtenPrijs + dessertsPrijs);
-            }
+                totaalBedrag *= 0.9m;
+            //totaalBedrag = Aantal * (BesteldGerechten.BerekenBedrag() + Dranken.BerekenBedrag() + Desserts.BerekenBedrag());
             return totaalBedrag;
-
         }
         public override string ToString()
         {
@@ -70,8 +63,9 @@ namespace OefeningPF
         }
         public string ToonBestelling()
         {
+            bestellingenValue = "";
             bestellingenValue += Klanten != null ? $"{Klanten.KlantID}#":"0#";
-            bestellingenValue += BesteldGerechten != null ? $"{BesteldGerechten.Gerecht.Naam}-{BesteldGerechten.Grootte}-{BesteldGerechten.AantalExtras()}-{BesteldGerechten.ExtraString("-").Replace("extra: ","")}#" : "#";
+            bestellingenValue += BesteldGerechten != null ? $"{BesteldGerechten.Gerecht.Naam}-{BesteldGerechten.Grootte}-{BesteldGerechten.AantalExtras}-{BesteldGerechten.ExtraString("-").Replace("extra: ","")}#" : "#";
             if (Dranken != null)
                 bestellingenValue += Dranken is Frisdrank ? $"F-{Dranken.Naam}#" : $"W-{Dranken.Naam}#";
             else

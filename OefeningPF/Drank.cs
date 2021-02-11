@@ -6,15 +6,12 @@ namespace OefeningPF
 {
     public abstract class Drank : IBedrag
     {
-        public enum DrankNaam
-        {
-            Water, Limonade, Cocacola, Koffie, Thee
-        }
-        public abstract DrankNaam Naam { get; set; }
+        public abstract List<string> DrankNamen { get; set; }
+        public abstract string Naam { get; set; }
        
         public abstract decimal Prijs { get; }
 
-        public Drank(DrankNaam naam) => Naam = naam;
+        public Drank(string naam) => Naam = naam;
        
         public abstract decimal BerekenBedrag();
         
